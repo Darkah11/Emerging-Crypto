@@ -10,7 +10,7 @@ import t3 from "@/public/t3.jpg";
 import t4 from "@/public/t4.jpg";
 import t5 from "@/public/t5.jpg";
 import t6 from "@/public/t6.jpg";
-import Button from "@/components/button";
+import Button from "@/components/Button";
 
 export default function Home() {
   return (
