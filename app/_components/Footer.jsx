@@ -17,7 +17,7 @@ export default function Footer() {
         </ul>
         <ul className=" mt-2 text-center flex flex-col gap-y-2">
             <li><Link className=" text-white hover:text-primary" href={'/'}>Politics and Crypto</Link></li>
-            <li><Link className=" text-white hover:text-primary" href={'/'}>New Texh</Link></li>
+            <li><Link className=" text-white hover:text-primary" href={'/'}>New Tech</Link></li>
             <li><Link className=" text-white hover:text-primary" href={'/'}>Defi</Link></li>
             <li><Link className=" text-white hover:text-primary" href={'/'}>Upcoming Events</Link></li>
         </ul>
