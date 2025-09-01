@@ -25,3 +25,43 @@ body {
   background: white;
 
 }
+
+.marquee-container {
+  /* Hides the overflowing content */
+  overflow: hidden;
+  /* Prevents items from wrapping to the next line */
+  white-space: nowrap;
+  width: 100%;
+ 
+  box-sizing: border-box; /* Ensures padding/borders are included in the width */
+}
+
+.marquee-content {
+  /* Must be an inline-block to allow the full width to be calculated */
+  display: inline-block;
+  width: max-content; 
+  animation: scroll-left 200s linear infinite; /* Adjust duration for speed */
+}
+
+/* Pause the animation on hover */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+.crypto-item {
+  display: inline-block;
+  padding: 1rem 1.5rem;
+}
+
+
+@keyframes scroll-left {
+  /* Starts just off-screen to the right */
+  0% {
+    transform: translateX(100vw);
+  }
+  /* Ends off-screen to the left by the full width of one content set */
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
