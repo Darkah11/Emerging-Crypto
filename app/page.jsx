@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Header from "./_components/Header";
 import heroImg from "@/public/hero-image.png";
@@ -12,8 +13,23 @@ import t5 from "@/public/t5.jpg";
 import t6 from "@/public/t6.jpg";
 import Button from "@/components/Button";
 import Footer from "./_components/Footer";
+import { useState } from "react";
+import { saveEmail } from "@/utils/supabase";
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await saveEmail(email);
+      alert("Thanks for subscribing!");
+      setEmail("");
+    } catch (err) {
+      console.error(err);
+      alert("Error saving email");
+    }
+  };
   return (
     <>
       <Header />
@@ -98,18 +114,21 @@ export default function Home() {
             </div>
             <div className=" mt-8 flex flex-col items-center gap-y-10">
               <div className="">
-                <Image src={sui} className=" min-w-full h-[200px] object-cover" />
+                <Image
+                  src={sui}
+                  className=" min-w-full h-[200px] object-cover"
+                />
                 <div className=" text-black mt-3">
                   <h3 className=" text-xl font-bold">
                     Top Projects on SUI - Your ultimate guide to the SUI...
                   </h3>
                   <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                   Crypto News, Defi, Crypto and Politics
+                    Crypto News, Defi, Crypto and Politics
                   </p>
                   <p className=" text-gray-400 font-medium text-sm mt-3">
                     {" "}
-                    <span className=" text-black font-semibold">Editor</span> - May 12,
-                    2025
+                    <span className=" text-black font-semibold">Editor</span> -
+                    May 12, 2025
                   </p>
                   <p className=" mt-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -119,18 +138,21 @@ export default function Home() {
                 </div>
               </div>
               <div className="">
-                <Image src={pumpkin} className=" min-w-full h-[200px] object-cover" />
+                <Image
+                  src={pumpkin}
+                  className=" min-w-full h-[200px] object-cover"
+                />
                 <div className=" text-black mt-3">
                   <h3 className=" text-xl font-bold">
                     Top Projects on SUI - Your ultimate guide to the SUI...
                   </h3>
                   <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                   Crypto News, Defi, Crypto and Politics
+                    Crypto News, Defi, Crypto and Politics
                   </p>
                   <p className=" text-gray-400 font-medium text-sm mt-3">
                     {" "}
-                    <span className=" text-black font-semibold">Editor</span> - May 12,
-                    2025
+                    <span className=" text-black font-semibold">Editor</span> -
+                    May 12, 2025
                   </p>
                   <p className=" mt-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -140,18 +162,21 @@ export default function Home() {
                 </div>
               </div>
               <div className="">
-                <Image src={t4} className=" min-w-full h-[200px] object-cover" />
+                <Image
+                  src={t4}
+                  className=" min-w-full h-[200px] object-cover"
+                />
                 <div className=" text-black mt-3">
                   <h3 className=" text-xl font-bold">
                     Top Projects on SUI - Your ultimate guide to the SUI...
                   </h3>
                   <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                   Crypto News, Defi, Crypto and Politics
+                    Crypto News, Defi, Crypto and Politics
                   </p>
                   <p className=" text-gray-400 font-medium text-sm mt-3">
                     {" "}
-                    <span className=" text-black font-semibold">Editor</span> - May 12,
-                    2025
+                    <span className=" text-black font-semibold">Editor</span> -
+                    May 12, 2025
                   </p>
                   <p className=" mt-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -161,18 +186,21 @@ export default function Home() {
                 </div>
               </div>
               <div className="">
-                <Image src={t1} className=" min-w-full h-[200px] object-cover" />
+                <Image
+                  src={t1}
+                  className=" min-w-full h-[200px] object-cover"
+                />
                 <div className=" text-black mt-3">
                   <h3 className=" text-xl font-bold">
                     Top Projects on SUI - Your ultimate guide to the SUI...
                   </h3>
                   <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                   Crypto News, Defi, Crypto and Politics
+                    Crypto News, Defi, Crypto and Politics
                   </p>
                   <p className=" text-gray-400 font-medium text-sm mt-3">
                     {" "}
-                    <span className=" text-black font-semibold">Editor</span> - May 12,
-                    2025
+                    <span className=" text-black font-semibold">Editor</span> -
+                    May 12, 2025
                   </p>
                   <p className=" mt-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -182,18 +210,21 @@ export default function Home() {
                 </div>
               </div>
               <div className="">
-                <Image src={t3} className=" min-w-full h-[200px] object-cover" />
+                <Image
+                  src={t3}
+                  className=" min-w-full h-[200px] object-cover"
+                />
                 <div className=" text-black mt-3">
                   <h3 className=" text-xl font-bold">
                     Top Projects on SUI - Your ultimate guide to the SUI...
                   </h3>
                   <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                   Crypto News, Defi, Crypto and Politics
+                    Crypto News, Defi, Crypto and Politics
                   </p>
                   <p className=" text-gray-400 font-medium text-sm mt-3">
                     {" "}
-                    <span className=" text-black font-semibold">Editor</span> - May 12,
-                    2025
+                    <span className=" text-black font-semibold">Editor</span> -
+                    May 12, 2025
                   </p>
                   <p className=" mt-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -954,11 +985,15 @@ export default function Home() {
             <div className="mt-5">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="E-mail address"
                 className=" border border-dark block w-full outline-none rounded-sm px-3 h-[45px]"
+              required
               />
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className=" bg-primary uppercase font-medium text-dark mt-3 block w-full outline-none rounded-sm px-3 h-[45px]"
               >
                 subscribe
