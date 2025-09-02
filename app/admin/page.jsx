@@ -21,6 +21,7 @@ export default function Admin() {
     const getEmails = async () => {
       const emailList = await fetchEmails();
       setEmails(emailList);
+      console.log(emailList);
     };
 
     getEmails();
@@ -51,7 +52,7 @@ export default function Admin() {
             {emails.length === 0 ? (
               <p>No emails yet.</p>
             ) : (
-              null(
+              (
                 <ul className="list-disc list-inside">
                   {emails.map((email, i) => (
                     <li key={i}>{email}</li>
