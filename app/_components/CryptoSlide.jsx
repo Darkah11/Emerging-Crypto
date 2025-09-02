@@ -1,13 +1,17 @@
 "use client";
 import useFetch from "@/components/useFetch";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import rise from "@/public/rise.png";
 import fall from "@/public/fall.png";
 
 export default function CryptoSlide() {
+  const marqueeRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
   const router = useRouter();
   const options = { 
   minimumFractionDigits: 2,
@@ -18,8 +22,47 @@ export default function CryptoSlide() {
   );
   console.log(data);
 
+
+   const onMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - marqueeRef.current.offsetLeft);
+    setScrollLeft(marqueeRef.current.scrollLeft);
+  };
+
+  const onMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - marqueeRef.current.offsetLeft;
+    const walk = x - startX;
+    marqueeRef.current.scrollLeft = scrollLeft - walk;
+
+    // The manual infinite loop logic
+    const { scrollLeft: currentScroll, scrollWidth, clientWidth } = marqueeRef.current;
+    if (currentScroll <= 0) {
+      marqueeRef.current.scrollLeft = scrollWidth / 2;
+    }
+    if (currentScroll >= scrollWidth / 2) {
+      marqueeRef.current.scrollLeft = currentScroll - scrollWidth / 2;
+    }
+  };
+
+
+
   return (
-    <div className="marquee-container">
+    <div className="marquee-container"
+    ref={marqueeRef}
+      onMouseDown={onMouseDown}
+      onMouseLeave={onMouseLeave}
+      onMouseUp={onMouseUp}
+      onMouseMove={onMouseMove}>
       <div className="marquee-content">
         {!loading &&
           data.map((crypto, index) => (
@@ -52,7 +95,7 @@ export default function CryptoSlide() {
                       />
                     <p className=" text-xs">
                       {" "}
-                      {crypto.price_change_percentage_24h < 0 ? crypto.price_change_percentage_24h.toFixed(2).substring(1) + "%" : crypto.price_change_percentage_24h.toFixed(2) + "%"}
+                      {crypto.price_change_percentage_24h == null ? '0%' : crypto.price_change_percentage_24h < 0 ? crypto.price_change_percentage_24h.toFixed(2).substring(1) + "%" : crypto.price_change_percentage_24h.toFixed(2) + "%"}
                     </p>
                     </div>
                   </div>

@@ -28,19 +28,32 @@ body {
 
 .marquee-container {
   /* Hides the overflowing content */
-  overflow: hidden;
+  overflow: scroll;
   /* Prevents items from wrapping to the next line */
   white-space: nowrap;
   width: 100%;
+   cursor: grab;
  
   box-sizing: border-box; /* Ensures padding/borders are included in the width */
+}
+.marquee-container::-webkit-scrollbar {
+  display: none;
+}
+.marquee-container {
+  scrollbar-width: none;
+}
+.marquee-container {
+  -ms-overflow-style: none;
+}
+.marquee-container:active {
+  cursor: grabbing;
 }
 
 .marquee-content {
   /* Must be an inline-block to allow the full width to be calculated */
   display: inline-block;
   width: max-content; 
-  animation: scroll-left 200s linear infinite; /* Adjust duration for speed */
+  animation: scroll-left 200s linear infinite; 
 }
 
 /* Pause the animation on hover */
