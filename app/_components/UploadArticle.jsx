@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Loader from "./Loader";
-import Image from "next/image";
+
 import {
   getAllPosts,
   deletePost,
@@ -21,7 +21,7 @@ export default function UploadArticle() {
    const [loading, setLoading] = useState(true);
    const [title, setTitle] = useState("");
    const [body, setBody] = useState("");
-   const [category, setCategory] = useState("New Tokens");
+   const [category, setCategory] = useState([]);
    const [selectedImage, setSelectedImage] = useState(null);
    const [imagePreview, setImagePreview] = useState("");
    const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -51,7 +51,8 @@ export default function UploadArticle() {
      e.preventDefault();
      setLoading(true);
      try {
-       const postData = { title, body, category };
+     const postData = { title, body, categories: category };
+
 
        if (isEditing) {
          await updatePost(currentPostId, {
@@ -74,9 +75,9 @@ export default function UploadArticle() {
      }
    };
    const handleEdit = (post) => {
-     setTitle(post.title),
-       setBody(post.body),
-       setCategory(post.category),
+     setTitle(post.title), setBody(post.body), setCategory(post.category || []);
+
+
        setSelectedImage(null);
 
      setImagePreview(post.image_url || "");
@@ -101,7 +102,7 @@ export default function UploadArticle() {
    const resetForm = () => {
      setTitle("");
      setBody("");
-     setCategory("New Tokens");
+     setCategory([]);
      setSelectedImage(null);
      setImagePreview("");
      setIsEditing(false);
@@ -135,33 +136,40 @@ export default function UploadArticle() {
               required
             />
           </div>
+          
           <div>
-            <label
-              htmlFor="title"
-              className=" font-semibold tracking-wider uppercase"
-            >
-              Category
+            <label className="font-semibold tracking-wider uppercase">
+              Categories
             </label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              name="category"
-              id="category"
-              className=" block px-2 w-full h-[40px] rounded-md mt-1 bg-transparent border border-dark"
-              required
-            >
-              <option value="" disabled>
-                Select category
-              </option>
-              <option value="new tokens">New Tokens</option>
-              <option value="top projects">Top Projects</option>
-              <option value="new crypto">New Crypto</option>
-              <option value="politics and crypto">Politics and Crypto</option>
-              <option value="new tech">New Tech</option>
-              <option value="defi">Defi</option>
-              <option value="Events">Events</option>
-            </select>
+            <div className="flex flex-col gap-2 mt-2">
+              {[
+                "new tokens",
+                "top projects",
+                "new crypto",
+                "politics and crypto",
+                "new tech",
+                "defi",
+                "Events",
+              ].map((cat) => (
+                <label key={cat} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    value={cat}
+                    checked={category.includes(cat)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setCategory([...category, cat]);
+                      } else {
+                        setCategory(category.filter((c) => c !== cat));
+                      }
+                    }}
+                  />
+                  {cat}
+                </label>
+              ))}
+            </div>
           </div>
+
           <div>
             <label className=" font-semibold tracking-wider uppercase">
               Add Image
@@ -308,10 +316,11 @@ export default function UploadArticle() {
                   <h3 className=" text-black font-medium text-lg">
                     {post.title}
                   </h3>
-                  <p className=" text-sm text-gray-600 mt-2">
-                    {post.category} •{" "}
+                  <p className="text-sm text-gray-600 mt-2">
+                    {post.category?.join(", ")} •{" "}
                     {new Date(post.created_at).toLocaleDateString()}
                   </p>
+
                   <div className=" flex flex-row gap-x-5 mt-3">
                     <button
                       onClick={() => handleEdit(post)}
