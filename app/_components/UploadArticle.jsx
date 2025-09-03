@@ -303,8 +303,8 @@ export default function UploadArticle() {
             </p>
           ) : (
             <div className=" mt-5 flex flex-col gap-y-10">
-              {posts.map((post) => (
-                <div className=" border-b border-gray-900 pb-5">
+              {posts.map((post, index) => (
+                <div key={index} className=" border-b border-gray-900 pb-5">
                   <h3 className=" text-black font-medium text-lg">
                     {post.title}
                   </h3>
