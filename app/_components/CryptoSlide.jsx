@@ -77,8 +77,8 @@ export default function CryptoSlide() {
       <div className="marquee-content">
         {!loading &&
           data.map((crypto, index) => (
-            <Link href={"/"} key={index}>
-              <div className="crypto-item border py-5">
+            <Link href={""} key={index}>
+              <div className="crypto-item border ">
                 <div className=" flex items-center gap-x-2">
                   <div>
                     <img

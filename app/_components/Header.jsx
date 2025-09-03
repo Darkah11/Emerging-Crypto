@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/ec-logo.png";
 import menu from "@/public/menu.png";
+import close from "@/public/close.png";
 import search from "@/public/search.png";
 import CryptoSlide from "./CryptoSlide";
 import React, { useState } from 'react'
@@ -37,10 +38,13 @@ export default function Header() {
 
         <ul
           className={` ${
-            isOpen ? " flex" : " hidden"
-          } absolute top-[70px] bg-gray-200 w-full left-0  flex-col items-center z-50 md:hidden`}
+            isOpen ? " opacity-100 transition-opacity duration-1000" : " hidden opacity-0"
+          } fixed flex  top-0 bg-gray-200 py-12 w-full h-full left-0  flex-col items-center z-50 md:hidden`}
         >
-          <li className=" border-b border-gray-10 w-full text-center">
+          <button onClick={() => handleOpen(!isOpen)} className=" absolute top-3 right-3 ">
+              <Image src={close} width={30} height={30} />
+            </button>
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/"}
@@ -49,7 +53,7 @@ export default function Header() {
               Home
             </Link>
           </li>
-          <li className=" border-b border-gray-10 w-full text-center">
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/new-tokens"}
@@ -58,7 +62,7 @@ export default function Header() {
               New Tokens
             </Link>
           </li>
-          <li className=" border-b border-gray-10 w-full text-center">
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/top-projects"}
@@ -67,7 +71,7 @@ export default function Header() {
               Top Projects
             </Link>
           </li>
-          <li className=" border-b border-gray-10 w-full text-center">
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/new-crypto"}
@@ -76,7 +80,7 @@ export default function Header() {
               New Crypto
             </Link>
           </li>
-          <li className=" border-b border-gray-10 w-full text-center">
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/politics-and-crypto"}
@@ -85,7 +89,7 @@ export default function Header() {
               Politics and Crypto
             </Link>
           </li>
-          <li className=" border-b border-gray-10 w-full text-center">
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/new-tech"}
@@ -94,7 +98,7 @@ export default function Header() {
               New Tech
             </Link>
           </li>
-          <li className=" border-b border-gray-10 w-full text-center">
+          <li className=" border-b font-semibold text-lg w-full text-center">
             <Link
               className=" py-3 block hover:text-orange-10 transition-all"
               href={"/defi"}
@@ -125,7 +129,7 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <CryptoSlide />
+      {/* <CryptoSlide /> */}
     </>
   );
 }

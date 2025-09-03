@@ -54,6 +54,7 @@ body {
   display: inline-block;
   width: max-content; 
   animation: scroll-left 200s linear infinite; 
+  margin-bottom: -4px;
 }
 
 /* Pause the animation on hover */
@@ -68,6 +69,7 @@ body {
 .crypto-item {
   display: inline-block;
   padding: 1rem 1.5rem;
+  margin-bottom: ;
 }
 
 

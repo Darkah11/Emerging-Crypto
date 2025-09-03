@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Header from "./_components/Header";
 import heroImg from "@/public/hero-image.png";
 import sui from "@/public/sui.jpg";
 import pumpkin from "@/public/pumpkin.jpg";
@@ -11,6 +10,7 @@ import t4 from "@/public/t4.jpg";
 import t5 from "@/public/t5.jpg";
 import t6 from "@/public/t6.jpg";
 import Button from "@/components/Button";
+import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 
 export default function Home() {
