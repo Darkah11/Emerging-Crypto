@@ -1,115 +1,253 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Loader from "./Loader";
+import Image from "next/image";
+import {
+  getAllPosts,
+  deletePost,
+  createPost,
+  updatePost,
+} from "../../utils/supabase";
 import ImageUploader from "react-image-upload";
 import "react-image-upload/dist/index.css";
 // import ImageUploading from "react-images-uploading";
 
 export default function UploadArticle() {
-  //   const [images, setImages] = useState([]);
-  //   const maxNumber = 69;
 
-  //   const onChange = (imageList, addUpdateIndex) => {
-  //     // data for submit
-  //     console.log('imageList, addUpdateIndex');
-  //     setImages(imageList);
-  //   };
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
-  const [content, setContent] = useState("");
-  function getImageFileObject(imageFile) {
-    console.log({ imageFile });
-  }
+   const [posts, setPosts] = useState([]);
 
-  function runAfterImageDelete(file) {
-    console.log({ file });
-    setImage("");
-  }
+   const [isEditing, setIsEditing] = useState(false);
+   const [currentPostId, setCurrentPostId] = useState(null);
+   const [loading, setLoading] = useState(true);
+   const [title, setTitle] = useState("");
+   const [body, setBody] = useState("");
+   const [category, setCategory] = useState("New Tokens");
+   const [selectedImage, setSelectedImage] = useState(null);
+   const [imagePreview, setImagePreview] = useState("");
+   const [showDeleteModal, setShowDeleteModal] = useState(false);
+   const [postToDelete, setPostToDelete] = useState(null);
+
+   useEffect(() => {
+     const fetchPosts = async () => {
+       try {
+         const posts = await getAllPosts();
+         setPosts(posts);
+       } catch (err) {
+         console.error("Error fetching posts:", err);
+       } finally {
+         setLoading(false);
+       }
+     };
+
+     fetchPosts();
+   }, []);
+
+   const handlePhotoChange = (e) => {
+     setImagePreview(URL.createObjectURL(e.target.files[0]));
+     setSelectedImage(e.target.files[0]); // Store File object directly
+   };
+
+   const handleSubmit = async (e) => {
+     e.preventDefault();
+     setLoading(true);
+     try {
+       const postData = { title, body, category };
+
+       if (isEditing) {
+         await updatePost(currentPostId, {
+           ...postData,
+           imageFile: selectedImage,
+         });
+       } else {
+         await createPost({
+           ...postData,
+           imageFile: selectedImage,
+         });
+       }
+
+       setPosts(await getAllPosts());
+       setLoading(false);
+       resetForm();
+     } catch (err) {
+       console.error("Error saving post:", err.response?.data || err.message);
+       alert(err.response?.data?.message || "Error saving post");
+     }
+   };
+   const handleEdit = (post) => {
+     setTitle(post.title),
+       setBody(post.body),
+       setCategory(post.category),
+       setSelectedImage(null);
+
+     setImagePreview(post.image_url || "");
+     setCurrentPostId(post.id);
+     setIsEditing(true);
+   };
+
+   const confirmDelete = (id) => {
+     setPostToDelete(id);
+     setShowDeleteModal(true);
+   };
+
+   const handleConfirmDelete = async () => {
+     try {
+       await deletePost(postToDelete);
+       setPosts(posts.filter((post) => post.id !== postToDelete));
+       setShowDeleteModal(false);
+     } catch (err) {
+       console.error("Error deleting post:", err);
+     }
+   };
+   const resetForm = () => {
+     setTitle("");
+     setBody("");
+     setCategory("New Tokens");
+     setSelectedImage(null);
+     setImagePreview("");
+     setIsEditing(false);
+     setCurrentPostId(null);
+   };
+
+   if (loading) return <Loader />;
 
   return (
-    <form className=" flex flex-col gap-y-5">
-      <div>
-        <label
-          htmlFor="title"
-          className=" font-semibold tracking-wider uppercase"
-        >
-          Title
-        </label>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className=" outline-none block px-2 w-full h-[40px] rounded-md mt-1 bg-transparent border border-dark"
-          type="text"
-          id="title"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="title"
-          className=" font-semibold tracking-wider uppercase"
-        >
-          Category
-        </label>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          name="cars"
-          id="article-category"
-          className=" block px-2 w-full h-[40px] rounded-md mt-1 bg-transparent border border-dark"
-        >
-          <option value="" disabled>
-            Select category
-          </option>
-          <option value="new tokens">New Tokens</option>
-          <option value="top projects">Top Projects</option>
-          <option value="new crypto">New Crypto</option>
-          <option value="politics and crypto">Politics and Crypto</option>
-          <option value="new tech">New Tech</option>
-          <option value="defi">Defi</option>
-          <option value="Events">Events</option>
-        </select>
-      </div>
-      <div>
-        <label className=" font-semibold tracking-wider uppercase">
-          Add Image
-        </label>
-        <ImageUploader
-          style={{
-            width: "300px",
-            height: "200px",
-            backgroundColor: "transparent",
-            border: "1px solid black",
-            borderRadius: "10px",
-            marginTop: "4px",
-          }}
-          onFileAdded={(img) => getImageFileObject(img)}
-          onFileRemoved={(img) => runAfterImageDelete(img)}
+    <div className="">
+      <h2 className="text-xl font-bold text-eco-green mb-4">
+        {isEditing ? "Edit Post" : "Create New Post"}
+      </h2>
 
-          //   deleteIcon={<button>remove</button>}
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="content"
-          className=" font-semibold tracking-wider uppercase"
-        >
-          Content
-        </label>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className=" outline-none py-3 block px-2 w-full h-[200px] rounded-md mt-1 bg-transparent border border-dark"
-          type="text"
-          id="content"
-        ></textarea>
-      </div>
-      <div>
-        <button className=" bg-primary w-full text-white h-[50px] rounded-lg">
-          Post Article
-        </button>
-      </div>
+      <section className=" bg-gray-200   max-w-[370px] mx-auto px-5 py-7">
+        <form onSubmit={handleSubmit} className=" flex flex-col gap-y-5">
+          <div>
+            <label
+              htmlFor="title"
+              className=" font-semibold tracking-wider uppercase"
+            >
+              Title
+            </label>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className=" outline-none block px-2 w-full h-[40px] rounded-md mt-1 bg-transparent border border-dark"
+              type="text"
+              id="title"
+              name="title"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="title"
+              className=" font-semibold tracking-wider uppercase"
+            >
+              Category
+            </label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              name="category"
+              id="category"
+              className=" block px-2 w-full h-[40px] rounded-md mt-1 bg-transparent border border-dark"
+              required
+            >
+              <option value="" disabled>
+                Select category
+              </option>
+              <option value="new tokens">New Tokens</option>
+              <option value="top projects">Top Projects</option>
+              <option value="new crypto">New Crypto</option>
+              <option value="politics and crypto">Politics and Crypto</option>
+              <option value="new tech">New Tech</option>
+              <option value="defi">Defi</option>
+              <option value="Events">Events</option>
+            </select>
+          </div>
+          <div>
+            <label className=" font-semibold tracking-wider uppercase">
+              Add Image
+            </label>
+            {/*<ImageUploader
+            style={{
+              width: "300px",
+              height: "200px",
+              backgroundColor: "transparent",
+              border: "1px solid black",
+              borderRadius: "10px",
+              marginTop: "4px",
+            }}
+            onFileAdded={(img) => getImageFileObject(img)}
+            onFileRemoved={(img) => runAfterImageDelete(img)}
 
-      {/* <div className="App">
+            //   deleteIcon={<button>remove</button>}
+          /> */}
+
+            <div className="flex flex-col items-center gap-4 w-full">
+              <input
+                type="file"
+                name="image"
+                id="postImage"
+                className="hidden"
+                onChange={handlePhotoChange}
+                accept="image/jpg, image/png, image/jpeg"
+              />
+              <label
+                htmlFor="postImage"
+                className={`flex w-full max-w-xs cursor-pointer flex-col items-center gap-2 rounded-xl bg-gray-100 dark:bg-gray-700 bg-cover bg-center p-4 ${
+                  imagePreview ? "h-48" : "h-32"
+                }`}
+                style={{
+                  backgroundImage: imagePreview
+                    ? `linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), url(${imagePreview})`
+                    : "",
+                }}
+              >
+                {!imagePreview && (
+                  <span className="text-sm font-semibold text-eco-green">
+                    + Upload Image
+                  </span>
+                )}
+              </label>
+              <p className="text-xs text-gray-500  text-center max-w-xs">
+                Image must be below 20MB. Use PNG or JPG format.
+              </p>
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="content"
+              className=" font-semibold tracking-wider uppercase"
+            >
+              Content
+            </label>
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              className=" outline-none py-3 block px-2 w-full h-[200px] rounded-md mt-1 bg-transparent border border-dark"
+              type="text"
+              id="content"
+              name="content"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className=" bg-primary w-full text-white h-[50px] rounded-lg"
+            >
+              {isEditing ? "Update Post" : "Publish Post"}
+            </button>
+            {isEditing && (
+              <button
+                type="button"
+                onClick={resetForm}
+                className="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 transition"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+
+          {/* <div className="App">
         <ImageUploading
           multiple
           value={images}
@@ -154,6 +292,71 @@ export default function UploadArticle() {
           )}
         </ImageUploading>
       </div> */}
-    </form>
+        </form>
+      </section>
+      <section>
+        <div className=" max-w-[370px] bg-blue-200 px-5 py-10 mx-auto mt-24">
+          <h2 className=" text-2xl text-dark font-semibold">Your Posts</h2>
+          {posts.length === 0 ? (
+            <p className="text-gray-900 ">
+              No posts yet. Create your first post!
+            </p>
+          ) : (
+            <div className=" mt-5 flex flex-col gap-y-10">
+              {posts.map((post) => (
+                <div className=" border-b border-gray-900 pb-5">
+                  <h3 className=" text-black font-medium text-lg">
+                    {post.title}
+                  </h3>
+                  <p className=" text-sm text-gray-600 mt-2">
+                    {post.category} •{" "}
+                    {new Date(post.created_at).toLocaleDateString()}
+                  </p>
+                  <div className=" flex flex-row gap-x-5 mt-3">
+                    <button
+                      onClick={() => handleEdit(post)}
+                      className=" px-7 py-[5px] bg-primary rounded-md text-white"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => confirmDelete(post.id)}
+                      className=" px-7 py-[5px] bg-red-600 rounded-md text-white"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-gray-700 opacity-90  flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+            <h2 className="text-xl font-semibold mb-4">Are you sure?</h2>
+            <p className="text-gray-600 mb-6">
+              Do you really want to delete this post? This action cannot be
+              undone.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
