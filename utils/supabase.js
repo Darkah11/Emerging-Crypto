@@ -4,7 +4,8 @@ import { createClient } from "@supabase/supabase-js";
 //const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 const supabaseUrl = "https://tgqoaogsjjpllhbrjkal.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncW9hb2dzampwbGxoYnJqa2FsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY3Njc4NTEsImV4cCI6MjA3MjM0Mzg1MX0.pxLGHTPnbnHR-2AnANG4WQe-JtW7w4uFFYcUuKAxF7U";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncW9hb2dzampwbGxoYnJqa2FsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Njc2Nzg1MSwiZXhwIjoyMDcyMzQzODUxfQ.VTnIZ3BqIo8m5l5TXlAZEqcchjLGAXQq163QAtOJgY0";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Image Upload to Storage
@@ -27,29 +28,7 @@ export const uploadImage = async (file) => {
 };
 
 
-export const createPost = async ({ title, body, category, imageFile }) => {
-  let imageUrl = null;
-  if (imageFile) {
-    const imagePath = await uploadImage(imageFile);
-  
-    imageUrl = `${supabaseUrl}/storage/v1/object/public/blog-images/${imagePath}`;
-  }
 
-  const { data, error } = await supabase
-    .from("posts")
-    .insert({
-      title,
-      body,
-      category,
-      image_url: imageUrl,
-      created_at: new Date().toISOString(),
-    })
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
-};
 // Get All Posts
 export const getAllPosts = async () => {
   const { data, error } = await supabase
@@ -84,20 +63,45 @@ export const getPostById = async (id) => {
   return data;
 };
 
+
+// Create Post
+export const createPost = async ({ title, body, categories, imageFile }) => {
+  let imageUrl = null;
+  if (imageFile) {
+    const imagePath = await uploadImage(imageFile);
+    imageUrl = `${supabaseUrl}/storage/v1/object/public/blog-images/${imagePath}`;
+  }
+
+  const { data, error } = await supabase
+    .from("posts")
+    .insert({
+      title,
+      body,
+      category: Array.isArray(categories) ? categories : [categories], // ✅ force array
+      image_url: imageUrl,
+      created_at: new Date().toISOString(),
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
 // Update Post
-// Update Post - Fixed version
-export const updatePost = async (id, { title, body, category, imageFile }) => {
-  const updates = { title, body, category };
+export const updatePost = async (id, { title, body, categories, imageFile }) => {
+  const updates = {
+    title,
+    body,
+    category: Array.isArray(categories) ? categories : [categories], // ✅ force array
+  };
 
   if (imageFile) {
-    // Delete old image if exists
     const oldPost = await getPostById(id);
     if (oldPost.image_url) {
       const fileName = oldPost.image_url.split("/").pop();
       await supabase.storage.from("blog-images").remove([`posts/${fileName}`]);
     }
-
-    // Upload new image and get full public URL
     const imagePath = await uploadImage(imageFile);
     updates.image_url = `${supabaseUrl}/storage/v1/object/public/blog-images/${imagePath}`;
   }
@@ -112,6 +116,7 @@ export const updatePost = async (id, { title, body, category, imageFile }) => {
   if (error) throw error;
   return data;
 };
+
 
 // Delete Post
 export const deletePost = async (id) => {
@@ -155,7 +160,8 @@ export const saveEmail = async (email) => {
 export const getStats = async () => {
   const [{ count: emailCount }, { count: postCount }] = await Promise.all([
     supabase.from("emails").select("*", { count: "exact", head: true }),
-    supabase.from("posts").select("*", { count: "exact", head: true }),
+supabase.from("posts").select("id", { count: "exact", head: true }),
+
   ]);
 
   return { emailCount, postCount };
