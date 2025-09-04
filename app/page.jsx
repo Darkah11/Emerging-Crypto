@@ -13,13 +13,14 @@ import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import Newsletter from "./_components/Newsletter";
 import Image from "next/image";
+import LibraryCarousel from "./_components/Carousel";
 
 export default function Home() {
   return (
     <>
       <Header />
       <main>
-        <section className=" px-5 py-10">
+        {/* <section className=" px-5 py-10">
           <div className=" flex flex-col items-center">
             <div>
               <Image src={heroImg} />
@@ -35,8 +36,11 @@ export default function Home() {
               <Button text={"Contact Us"} style={" mt-5 "} />
             </div>
           </div>
+        </section> */}
+        <section>
+          <LibraryCarousel />
         </section>
-        <section className=" py-10">
+        {/* <section className=" py-10">
           <div>
             <div className=" px-5">
               <span className=" text-primary text-sm">Headlines</span>
@@ -90,7 +94,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <section className=" px-5 py-10">
           <div>
             <div>

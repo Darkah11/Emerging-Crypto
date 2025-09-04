@@ -45,6 +45,15 @@ body {
 .marquee-container {
   -ms-overflow-style: none;
 }
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+.hide-scroll {
+  scrollbar-width: none;
+}
+.hide-scroll {
+  -ms-overflow-style: none;
+}
 .marquee-container:active {
   cursor: grabbing;
 }

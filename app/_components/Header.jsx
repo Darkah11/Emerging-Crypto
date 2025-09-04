@@ -171,7 +171,7 @@ export default function Header() {
             placeholder=" Search crypto"
           />
           {/* </div> */}
-          <div className=" mt-8">
+          <div className=" mt-8 max-h-[375px] overflow-scroll hide-scroll">
             {searchValue != '' && data ?
               data.coins.map((coin, index) => (
                 <Link href={"/"} key={index}>
