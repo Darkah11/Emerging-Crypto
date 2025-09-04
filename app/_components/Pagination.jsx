@@ -121,13 +121,20 @@ export default function Pagination({ itemsPerPage }) {
     <>
       <Items currentItems={currentItems} />
       <ReactPaginate
-      className=" flex items-center gap-x-3"
+      className=" flex items-center gap-x-3 justify-center mt-10 "
+      pageClassName=" bg-gray-200 rounded-md"
+      activeClassName=" bg-primary text-white"
+      pageLinkClassName=" block p-2 "
+      previousClassName=" bg-gray-200 rounded-md"
+      previousLinkClassName=" block p-2 hover:text-primary"
+      nextClassName=" bg-gray-200 rounded-md"
+      nextLinkClassName=" block p-2 hover:text-primary"
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="<"
         renderOnZeroPageCount={null}
       />
     </>

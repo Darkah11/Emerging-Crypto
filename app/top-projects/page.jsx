@@ -17,13 +17,13 @@ import Aside from "../_components/Aside";
 import Pagination from "../_components/Pagination";
 import Newsletter from "../_components/Newsletter";
 
-export default function NewTokens() {
+export default function TopProjects() {
   return (
     <>
       <Header />
       <main>
         <div className=" bg-dark text-white px-5 py-12 lg:px-12 xl:px-24">
-          <h2 className=" text-3xl font-semibold md:text-4xl">New Tokens</h2>
+          <h2 className=" text-3xl font-semibold md:text-4xl">Top Projects</h2>
           <p className=" mt-2 max-w-[600px]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
             aspernatur deserunt voluptas possimus soluta ipsam id, nulla nihil

@@ -1,5 +1,3 @@
-"use client"
-import Image from "next/image";
 import heroImg from "@/public/hero-image.png";
 import sui from "@/public/sui.jpg";
 import pumpkin from "@/public/pumpkin.jpg";
@@ -13,23 +11,10 @@ import t6 from "@/public/t6.jpg";
 import Button from "@/components/Button";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
-import { useState } from "react";
-import { saveEmail } from "@/utils/supabase";
+import Newsletter from "./_components/Newsletter";
+import Image from "next/image";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await saveEmail(email);
-      alert("Thanks for subscribing!");
-      setEmail("");
-    } catch (err) {
-      console.error(err);
-      alert("Error saving email");
-    }
-  };
   return (
     <>
       <Header />
@@ -977,30 +962,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className=" bg- px-5 py-10">
-          <div>
-            <h2 className=" text-3xl text-center font-semibold">
-              Subscribe To Our Newsletters
-            </h2>
-            <div className="mt-5">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="E-mail address"
-                className=" border border-dark block w-full outline-none rounded-sm px-3 h-[45px]"
-              required
-              />
-              <button
-                type="submit"
-                onClick={handleSubmit}
-                className=" bg-primary uppercase font-medium text-dark mt-3 block w-full outline-none rounded-sm px-3 h-[45px]"
-              >
-                subscribe
-              </button>
-            </div>
-          </div>
-        </section>
+       <Newsletter />
       </main>
       <Footer />
     </>
