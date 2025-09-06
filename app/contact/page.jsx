@@ -4,6 +4,10 @@ import Newsletter from "../_components/Newsletter";
 import Footer from "../_components/Footer";
 import ContactForm from "../_components/ContactForm";
 
+export const metadata = {
+  title: "Contact Us",
+};
+
 export default function Contact() {
   return (
     <>

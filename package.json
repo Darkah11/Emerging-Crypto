@@ -15,8 +15,10 @@
     "react-dom": "^18",
     "react-image-upload": "^3.0.1",
     "react-images-uploading": "^3.1.7",
+    "react-markdown": "^10.1.0",
     "react-paginate": "^8.3.0",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10",

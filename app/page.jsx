@@ -14,6 +14,9 @@ import Footer from "./_components/Footer";
 import Newsletter from "./_components/Newsletter";
 import Image from "next/image";
 import LibraryCarousel from "./_components/Carousel";
+import DetailArticle from "./_components/DetailArticle";
+import PreviewArticle from "./_components/PreviewArticle";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -37,7 +40,7 @@ export default function Home() {
             </div>
           </div>
         </section> */}
-        <section>
+        <section className=" lg:px-12 ">
           <LibraryCarousel />
         </section>
         {/* <section className=" py-10">
@@ -95,138 +98,17 @@ export default function Home() {
             </div>
           </div>
         </section> */}
-        <section className=" px-5 py-10">
+        <section className=" px-5 py-10 lg:px-12">
           <div>
-            <div>
+            <div className=" mb-5">
               <span className=" text-primary text-sm">Breaking</span>
               <h2 className=" text-4xl">Latest News</h2>
             </div>
-            <div className=" mt-8 flex flex-col items-center gap-y-10">
-              <div className="">
-                <Image
-                  src={sui}
-                  className=" min-w-full h-[200px] object-cover"
-                />
-                <div className=" text-black mt-3">
-                  <h3 className=" text-xl font-bold">
-                    Top Projects on SUI - Your ultimate guide to the SUI...
-                  </h3>
-                  <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                    Crypto News, Defi, Crypto and Politics
-                  </p>
-                  <p className=" text-gray-400 font-medium text-sm mt-3">
-                    {" "}
-                    <span className=" text-black font-semibold">Editor</span> -
-                    May 12, 2025
-                  </p>
-                  <p className=" mt-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Asperiores ut, unde consequatur fugit voluptates, impedit,
-                    provident quam voluptatum dolore officia voluptatem nesciunt
-                  </p>
-                </div>
-              </div>
-              <div className="">
-                <Image
-                  src={pumpkin}
-                  className=" min-w-full h-[200px] object-cover"
-                />
-                <div className=" text-black mt-3">
-                  <h3 className=" text-xl font-bold">
-                    Top Projects on SUI - Your ultimate guide to the SUI...
-                  </h3>
-                  <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                    Crypto News, Defi, Crypto and Politics
-                  </p>
-                  <p className=" text-gray-400 font-medium text-sm mt-3">
-                    {" "}
-                    <span className=" text-black font-semibold">Editor</span> -
-                    May 12, 2025
-                  </p>
-                  <p className=" mt-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Asperiores ut, unde consequatur fugit voluptates, impedit,
-                    provident quam voluptatum dolore officia voluptatem nesciunt
-                  </p>
-                </div>
-              </div>
-              <div className="">
-                <Image
-                  src={t4}
-                  className=" min-w-full h-[200px] object-cover"
-                />
-                <div className=" text-black mt-3">
-                  <h3 className=" text-xl font-bold">
-                    Top Projects on SUI - Your ultimate guide to the SUI...
-                  </h3>
-                  <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                    Crypto News, Defi, Crypto and Politics
-                  </p>
-                  <p className=" text-gray-400 font-medium text-sm mt-3">
-                    {" "}
-                    <span className=" text-black font-semibold">Editor</span> -
-                    May 12, 2025
-                  </p>
-                  <p className=" mt-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Asperiores ut, unde consequatur fugit voluptates, impedit,
-                    provident quam voluptatum dolore officia voluptatem nesciunt
-                  </p>
-                </div>
-              </div>
-              <div className="">
-                <Image
-                  src={t1}
-                  className=" min-w-full h-[200px] object-cover"
-                />
-                <div className=" text-black mt-3">
-                  <h3 className=" text-xl font-bold">
-                    Top Projects on SUI - Your ultimate guide to the SUI...
-                  </h3>
-                  <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                    Crypto News, Defi, Crypto and Politics
-                  </p>
-                  <p className=" text-gray-400 font-medium text-sm mt-3">
-                    {" "}
-                    <span className=" text-black font-semibold">Editor</span> -
-                    May 12, 2025
-                  </p>
-                  <p className=" mt-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Asperiores ut, unde consequatur fugit voluptates, impedit,
-                    provident quam voluptatum dolore officia voluptatem nesciunt
-                  </p>
-                </div>
-              </div>
-              <div className="">
-                <Image
-                  src={t3}
-                  className=" min-w-full h-[200px] object-cover"
-                />
-                <div className=" text-black mt-3">
-                  <h3 className=" text-xl font-bold">
-                    Top Projects on SUI - Your ultimate guide to the SUI...
-                  </h3>
-                  <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                    Crypto News, Defi, Crypto and Politics
-                  </p>
-                  <p className=" text-gray-400 font-medium text-sm mt-3">
-                    {" "}
-                    <span className=" text-black font-semibold">Editor</span> -
-                    May 12, 2025
-                  </p>
-                  <p className=" mt-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Asperiores ut, unde consequatur fugit voluptates, impedit,
-                    provident quam voluptatum dolore officia voluptatem nesciunt
-                  </p>
-                </div>
-              </div>
-            </div>
+            <DetailArticle />
           </div>
         </section>
-        <section className=" px-5 py-10">
-          <div className=" flex flex-col gap-y-24">
+        <section className=" px-5 py-10 lg:px-12">
+          <div className=" flex flex-col gap-y-24 md:flex-row md:gap-x-5 lg:gap-x-16">
             <div>
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
@@ -234,109 +116,13 @@ export default function Home() {
                   New Tokens
                 </h2>
               </div>
-              <div className=" mt-8 flex flex-col gap-y-5">
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t1}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t2}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t3}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t4}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t5}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t6}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
+              <PreviewArticle />
+              <div className=" mt-4">
+                <Link href={"/new-tokens"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
               </div>
             </div>
             <div>
@@ -346,115 +132,19 @@ export default function Home() {
                   Top Projects
                 </h2>
               </div>
-              <div className=" mt-8 flex flex-col gap-y-5">
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t1}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t2}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t3}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t4}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t5}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t6}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
+              <PreviewArticle />
+               <div className=" mt-4">
+                <Link href={"/top-projects"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </section>
-        <section className=" px-5 py-10">
-          <div className=" flex flex-col gap-y-24">
+        <section className=" px-5 py-10 lg:px-12">
+          <div className=" flex flex-col gap-y-24 md:flex-row md:gap-x-5 lg:gap-x-16">
             <div>
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
@@ -462,109 +152,13 @@ export default function Home() {
                   Crypto News
                 </h2>
               </div>
-              <div className=" mt-8 flex flex-col gap-y-5">
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t1}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t2}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t3}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t4}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t5}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t6}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
+              <PreviewArticle />
+               <div className=" mt-4">
+                <Link href={"/crypto-news"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
               </div>
             </div>
             <div>
@@ -574,115 +168,19 @@ export default function Home() {
                   Politics and Crypto
                 </h2>
               </div>
-              <div className=" mt-8 flex flex-col gap-y-5">
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t1}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t2}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t3}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t4}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t5}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t6}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
+              <PreviewArticle />
+               <div className=" mt-4">
+                <Link href={"/crypto-news"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </section>
-        <section className=" px-5 py-10">
-          <div className=" flex flex-col gap-y-24">
+        <section className=" px-5 py-10 lg:px-12">
+          <div className=" flex flex-col gap-y-24 md:flex-row md:gap-x-5 lg:gap-x-16">
             <div>
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
@@ -690,109 +188,13 @@ export default function Home() {
                   New Tech
                 </h2>
               </div>
-              <div className=" mt-8 flex flex-col gap-y-5">
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t1}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t2}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t3}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t4}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t5}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t6}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
+              <PreviewArticle />
+               <div className=" mt-4">
+                <Link href={"/new-tech"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
               </div>
             </div>
             <div>
@@ -802,122 +204,26 @@ export default function Home() {
                   Defi
                 </h2>
               </div>
-              <div className=" mt-8 flex flex-col gap-y-5">
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t1}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t2}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t3}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t4}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t5}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex items-center gap-x-2 h-[85px]">
-                  <div>
-                    <Image
-                      src={t6}
-                      className=" object-cover h-[85px] w-[120px]"
-                    />
-                  </div>
-                  <div className=" flex-1">
-                    <h3 className=" font-semibold text-[17px]">
-                      How to Spot a Crypto Scam: Red Flags Every Investor...
-                    </h3>
-                    <p className=" mt-1 text-sm">
-                      <span className=" text-primary font-medium">Editor</span>{" "}
-                      - May 12, 2025
-                    </p>
-                  </div>
-                </div>
+              <PreviewArticle />
+               <div className=" mt-4">
+                <Link href={"/defi"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </section>
-        <section className=" px-5 py-10">
+        <section className=" px-5 py-10 lg:px-12">
           <div>
             <div>
               {/* <span className=" text-primary text-sm">Breaking</span> */}
               <h2 className=" text-4xl border-b border-gray-300 pb-3">
-                Upcoming Events
+                Events
               </h2>
             </div>
-            <div className=" mt-8 flex flex-col items-center gap-y-2">
+            <div className=" mt-8 flex flex-col items-center gap-y-2 md:grid grid-cols-3 md:gap-x-2 lg:gap-x-5">
               <div className=" relative h-[210px]">
                 <div className=" px-3 pb-5 text-white absolute bg-black bg-opacity-30 h-full w-full flex flex-col justify-end">
                   <h3 className=" text-xl font-medium">
@@ -964,9 +270,16 @@ export default function Home() {
                 />
               </div>
             </div>
+             <div className=" mt-4 flex justify-center items-center">
+                <Link href={"/events"}>
+                  <button className="border border-primary text-primary px-5 py-2">
+                    See More
+                  </button>
+                </Link>
+              </div>
           </div>
         </section>
-       <Newsletter />
+        <Newsletter />
       </main>
       <Footer />
     </>

@@ -32,6 +32,8 @@ export default function UploadArticle() {
        try {
          const posts = await getAllPosts();
          setPosts(posts);
+         console.log(posts);
+         
        } catch (err) {
          console.error("Error fetching posts:", err);
        } finally {

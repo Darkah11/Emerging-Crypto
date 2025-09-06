@@ -17,6 +17,10 @@ import Aside from "../_components/Aside";
 import Pagination from "../_components/Pagination";
 import Newsletter from "../_components/Newsletter";
 
+export const metadata = {
+  title: "New Tokens",
+};
+
 export default function NewTokens() {
   return (
     <>

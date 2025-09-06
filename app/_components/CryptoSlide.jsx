@@ -20,7 +20,6 @@ export default function CryptoSlide() {
   const { data, loading, error } = useFetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order&per_page=100&page=1"
   );
-  console.log(data);
 
     const onMouseDown = (e) => {
     setIsDragging(true);

@@ -17,6 +17,10 @@ import Aside from "../_components/Aside";
 import Pagination from "../_components/Pagination";
 import Newsletter from "../_components/Newsletter";
 
+export const metadata = {
+  title: "Events",
+};
+
 export default function Events() {
   return (
     <>
