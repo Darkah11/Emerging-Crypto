@@ -1,5 +1,9 @@
+"use client";
+import { getAllPosts } from "@/utils/supabase";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function DetailArticle() {
   const items = [
@@ -58,35 +62,59 @@ export default function DetailArticle() {
       img: "/t6.jpg",
     },
   ];
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await getAllPosts();
+        const articles = posts.slice(0, 6);
+        setPosts(articles);
+      } catch (err) {
+        console.error("Error fetching posts:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
   return (
-    <div className="flex flex-col items-center gap-y-10
+    <div
+      className="flex flex-col items-center md:items-start gap-y-10
      md:grid md:grid-cols-2 md:gap-x-3 md:place-content-center
-     lg:grid-cols-3">
-      {items &&
-        items.map((item, index) => (
+     lg:grid-cols-3"
+    >
+      {posts &&
+        posts.map((item, index) => (
           <div key={index} className="max-w-[450px] md:mx-auto">
-            <Link href={"/"}>
+            <Link href={`/${item.id}`}>
               <img
-                src={item.img}
+                alt={item.title}
+                src={item.image_url}
                 className=" min-w-full h-[300px] object-cover"
               />
             </Link>
             <div className=" text-black mt-3">
               <Link
-                href={"/"}
+                href={`/${item.id}`}
                 className=" text-xl font-bold hover:text-primary"
               >
                 {item.title}
               </Link>
               <p className=" text-gray-400 font-medium text-sm mt-3 uppercase">
-                Crypto News, Defi, Crypto and Politics
+                {item.category.map((cat, index) =>
+                  index === item.category.length - 1 ? cat : cat + ", "
+                )}
               </p>
-              <p className=" text-gray-400 font-medium text-sm mt-3">
-                {" "}
-                <span className=" text-black font-semibold">Editor</span> -
-                {item.date}
+              <p className=" text-gray-600 font-medium text-sm mt-3">
+                {new Date(item.created_at).toDateString()}
               </p>
-              <p className=" mt-3">{item.body}</p>
+              <div className=" mt-3">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {item.body.slice(0, 149) + "..."}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
         ))}

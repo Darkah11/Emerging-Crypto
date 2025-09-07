@@ -19,7 +19,6 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSearchOpenXl, setIsSearchOpenXl] = useState(false);
-  console.log(isOpen);
 
   const options = {
     minimumFractionDigits: 2,
@@ -125,7 +124,7 @@ export default function Header() {
                 className=""
               >
                 {isSearchOpenXl ? (
-                  <Image src={close} width={30} height={30} />
+                  <Image alt="close icon" src={close} width={30} height={30} />
                 ) : (
                   <Image
                     alt="search icon"
@@ -225,7 +224,7 @@ export default function Header() {
               onClick={() => handleOpen(!isOpen)}
               className=" absolute top-3 right-3"
             >
-              <Image src={close} width={30} height={30} />
+              <Image alt="close icon" src={close} width={30} height={30} />
             </button>
             <li className=" border-b font-semibold text-lg w-full text-center">
               <Link
@@ -349,7 +348,7 @@ export default function Header() {
           </div>
         </div>
       </nav>
-      {/* <CryptoSlide /> */}
+      <CryptoSlide />
     </>
   );
 }

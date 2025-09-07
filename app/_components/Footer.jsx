@@ -13,7 +13,7 @@ export default function Footer() {
             <li><Link className=" text-white hover:text-primary " href={'/'}>Home</Link></li>
             <li><Link className=" text-white hover:text-primary" href={'/'}>New Tokens</Link></li>
             <li><Link className=" text-white hover:text-primary" href={'/'}>Top Projects</Link></li>
-            <li><Link className=" text-white hover:text-primary" href={'/'}>Crypto News</Link></li>
+            <li><Link className=" text-white hover:text-primary" href={'/'}>New Crypto</Link></li>
         </ul>
         <ul className=" mt-2 text-center flex flex-col gap-y-2">
             <li><Link className=" text-white hover:text-primary" href={'/'}>Politics and Crypto</Link></li>

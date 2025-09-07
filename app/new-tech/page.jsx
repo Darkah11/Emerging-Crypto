@@ -28,16 +28,16 @@ export default function NewTech() {
       <main>
         <div className=" bg-dark text-white px-5 py-12 lg:px-12 xl:px-24">
           <h2 className=" text-3xl font-semibold md:text-4xl">New Tech</h2>
-          <p className=" mt-2 max-w-[600px]">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-            aspernatur deserunt voluptas possimus soluta ipsam id, nulla nihil
-            modi porro.
+          <p className=" mt-2 max-w-[600px]">Behind the tokens are the tools. From zero-knowledge proofs
+            to cross-chain bridges and scaling breakthroughs, we explore the new
+            technologies driving crypto’s evolution — and how they’ll change the
+            way you interact with the blockchain.
           </p>
         </div>
         <section className=" px-5 lg:px-12 xl:px-24 ">
           <div className=" md:flex md:gap-x-5">
             <div className=" py-8 md:w-1/2">
-              <Pagination itemsPerPage={5}/>
+              <Pagination itemsPerPage={5} category={"new tech"} />
             </div>
             <div className=" md:w-1/2">
               <Aside />

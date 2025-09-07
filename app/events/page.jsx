@@ -29,15 +29,13 @@ export default function Events() {
         <div className=" bg-dark text-white px-5 py-12 lg:px-12 xl:px-24">
           <h2 className=" text-3xl font-semibold md:text-4xl">Events</h2>
           <p className=" mt-2 max-w-[600px]">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-            aspernatur deserunt voluptas possimus soluta ipsam id, nulla nihil
-            modi porro.
+Crypto never sleeps, and neither do the events that shape it. From global conferences and industry meetups to high-impact protocol upgrades and governance votes, we cover the moments that matter. Stay updated on where the biggest players are moving and how these events ripple across the market.
           </p>
         </div>
         <section className=" px-5 lg:px-12 xl:px-24 ">
           <div className=" md:flex md:gap-x-5">
             <div className=" py-8 md:w-1/2">
-              <Pagination itemsPerPage={5}/>
+              <Pagination itemsPerPage={5} category={'events'}/>
             </div>
             <div className=" md:w-1/2">
               <Aside />

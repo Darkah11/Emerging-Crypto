@@ -29,9 +29,7 @@ export default function NewTokens() {
         <div className=" bg-dark text-white px-5 py-12 lg:px-12 xl:px-24">
           <h2 className=" text-3xl font-semibold md:text-4xl">New Tokens</h2>
           <p className=" mt-2 max-w-[600px]">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-            aspernatur deserunt voluptas possimus soluta ipsam id, nulla nihil
-            modi porro.
+Every day, new tokens hit the chain, some with hype, others with substance. We spotlight the launches worth knowing about, breaking down tokenomics, utility, and potential risks, so you can separate noise from opportunity.
           </p>
         </div>
         <section className=" px-5 lg:px-12 xl:px-24 ">
@@ -181,7 +179,7 @@ export default function NewTokens() {
               </div>
             </div> */}
             <div className=" py-8 md:w-1/2">
-              <Pagination itemsPerPage={5}/>
+              <Pagination itemsPerPage={5} category={'new tokens'}/>
             </div>
             <div className=" md:w-1/2">
               <Aside />

@@ -23,17 +23,20 @@ export default function PoliticsAndCrypto() {
       <Header />
       <main>
         <div className=" bg-dark text-white px-5 py-12 lg:px-12 xl:px-24">
-          <h2 className=" text-3xl font-semibold md:text-4xl">Politics and Crypto</h2>
+          <h2 className=" text-3xl font-semibold md:text-4xl">
+            Politics and Crypto
+          </h2>
           <p className=" mt-2 max-w-[600px]">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-            aspernatur deserunt voluptas possimus soluta ipsam id, nulla nihil
-            modi porro.
+            Laws, regulations, and power struggles all shape crypto’s future. We
+            cut through the noise on political moves, government crackdowns, and
+            regulatory updates so you know how global decisions impact your
+            digital assets.
           </p>
         </div>
         <section className=" px-5 lg:px-12 xl:px-24 ">
           <div className=" md:flex md:gap-x-5">
             <div className=" py-8 md:w-1/2">
-              <Pagination itemsPerPage={5}/>
+              <Pagination itemsPerPage={5} category={"politics and crypto"} />
             </div>
             <div className=" md:w-1/2">
               <Aside />

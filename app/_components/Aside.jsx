@@ -15,9 +15,29 @@ import useFetch from "@/components/useFetch";
 import Link from "next/link";
 import rise from "@/public/rise.png";
 import fall from "@/public/fall.png";
+import { useEffect, useState } from "react";
+import { getAllPosts } from "@/utils/supabase";
 
 export default function Aside() {
-  const { data, loading, error } = useFetch(
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await getAllPosts();
+
+        const articles = posts.slice(0, 6);
+        setPosts(articles);
+      } catch (err) {
+        console.error("Error fetching posts:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+  const { data, error } = useFetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order&per_page=10&page=1"
   );
   const options = {
@@ -33,104 +53,35 @@ export default function Aside() {
             Latest News
           </h2>
         </div>
-        <div className=" mt-8 flex flex-col gap-y-5">
-          <Link href={""} className="group">
-            <div className=" flex items-center gap-x-2 h-[85px]">
-              <div>
-                <Image src={t1} className=" object-cover h-[85px] w-[120px]" />
-              </div>
-              <div className=" flex-1">
-                <h3 className=" font-semibold text-[17px] group-hover:text-primary">
-                  How to Spot a Crypto Scam: Red Flags Every Investor...
-                </h3>
-                <p className=" mt-1 text-sm">
-                  <span className=" text-gray-500 font-bold">Editor</span> -
-                  May 12, 2025
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link href={""} className="group">
-            <div className=" flex items-center gap-x-2 h-[85px]">
-              <div>
-                <Image src={t2} className=" object-cover h-[85px] w-[120px]" />
-              </div>
-              <div className=" flex-1">
-                <h3 className=" font-semibold text-[17px] group-hover:text-primary">
-                  How to Spot a Crypto Scam: Red Flags Every Investor...
-                </h3>
-                <p className=" mt-1 text-sm">
-                  <span className=" text-gray-500 font-bold">Editor</span> -
-                  May 12, 2025
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link href={""} className="group">
-            <div className=" flex items-center gap-x-2 h-[85px]">
-              <div>
-                <Image src={t3} className=" object-cover h-[85px] w-[120px]" />
-              </div>
-              <div className=" flex-1">
-                <h3 className=" font-semibold text-[17px] group-hover:text-primary">
-                  How to Spot a Crypto Scam: Red Flags Every Investor...
-                </h3>
-                <p className=" mt-1 text-sm">
-                  <span className=" text-gray-500 font-bold">Editor</span> -
-                  May 12, 2025
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link href={""} className="group">
-            <div className=" flex items-center gap-x-2 h-[85px]">
-              <div>
-                <Image src={t4} className=" object-cover h-[85px] w-[120px]" />
-              </div>
-              <div className=" flex-1">
-                <h3 className=" font-semibold text-[17px] group-hover:text-primary">
-                  How to Spot a Crypto Scam: Red Flags Every Investor...
-                </h3>
-                <p className=" mt-1 text-sm">
-                  <span className=" text-gray-500 font-bold">Editor</span> -
-                  May 12, 2025
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link href={""} className="group">
-            <div className=" flex items-center gap-x-2 h-[85px]">
-              <div>
-                <Image src={t5} className=" object-cover h-[85px] w-[120px]" />
-              </div>
-              <div className=" flex-1">
-                <h3 className=" font-semibold text-[17px] group-hover:text-primary">
-                  How to Spot a Crypto Scam: Red Flags Every Investor...
-                </h3>
-                <p className=" mt-1 text-sm">
-                  <span className=" text-gray-500 font-bold">Editor</span> -
-                  May 12, 2025
-                </p>
-              </div>
-            </div>
-          </Link>
-          <Link href={""} className="group">
-            <div className=" flex items-center gap-x-2 h-[85px]">
-              <div>
-                <Image src={t6} className=" object-cover h-[85px] w-[120px]" />
-              </div>
-              <div className=" flex-1">
-                <h3 className=" font-semibold text-[17px] group-hover:text-primary">
-                  How to Spot a Crypto Scam: Red Flags Every Investor...
-                </h3>
-                <p className=" mt-1 text-sm">
-                  <span className=" text-gray-500 font-bold">Editor</span> -
-                  May 12, 2025
-                </p>
-              </div>
-            </div>
-          </Link>
-        </div>
+        {posts.length !== 0 ? (
+          <div className=" mt-8 flex flex-col gap-y-5">
+            {posts.map((item, index) => (
+              <Link key={index} href={`/${item.id}`} className="group">
+                <div className=" flex items-center gap-x-2 h-[85px]">
+                  <div>
+                    <img
+                      src={item.image_url}
+                      width={100}
+                      height={100}
+                      alt="image"
+                      className=" object-cover h-[85px] w-[120px]"
+                    />
+                  </div>
+                  <div className=" flex-1">
+                    <h3 className=" font-semibold text-[17px] group-hover:text-primary">
+                      {item.title}
+                    </h3>
+                    <p className=" mt-1 text-sm">
+                      {new Date(item.created_at).toDateString()}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className=" text-2xl pt-5">No Articles</p>
+        )}
       </div>
       <div className=" py-8 max-w-[500px]">
         <div>

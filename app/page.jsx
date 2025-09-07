@@ -17,6 +17,7 @@ import LibraryCarousel from "./_components/Carousel";
 import DetailArticle from "./_components/DetailArticle";
 import PreviewArticle from "./_components/PreviewArticle";
 import Link from "next/link";
+import EventsArticle from "./_components/EventsArticle";
 
 export default function Home() {
   return (
@@ -109,14 +110,14 @@ export default function Home() {
         </section>
         <section className=" px-5 py-10 lg:px-12">
           <div className=" flex flex-col gap-y-24 md:flex-row md:gap-x-5 lg:gap-x-16">
-            <div>
+            <div className=" md:w-1/2">
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
                 <h2 className=" text-4xl border-b border-gray-300 pb-3">
                   New Tokens
                 </h2>
               </div>
-              <PreviewArticle />
+              <PreviewArticle category={'new tokens'} />
               <div className=" mt-4">
                 <Link href={"/new-tokens"}>
                   <button className="border border-primary text-primary px-5 py-2">
@@ -125,14 +126,14 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div>
+            <div className=" md:w-1/2">
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
                 <h2 className=" text-4xl border-b border-gray-300 pb-3">
                   Top Projects
                 </h2>
               </div>
-              <PreviewArticle />
+              <PreviewArticle category={'top projects'} />
                <div className=" mt-4">
                 <Link href={"/top-projects"}>
                   <button className="border border-primary text-primary px-5 py-2">
@@ -145,32 +146,32 @@ export default function Home() {
         </section>
         <section className=" px-5 py-10 lg:px-12">
           <div className=" flex flex-col gap-y-24 md:flex-row md:gap-x-5 lg:gap-x-16">
-            <div>
+            <div className=" md:w-1/2">
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
                 <h2 className=" text-4xl border-b border-gray-300 pb-3">
-                  Crypto News
+                  New Crypto
                 </h2>
               </div>
-              <PreviewArticle />
+              <PreviewArticle category={'new crypto'}  />
                <div className=" mt-4">
-                <Link href={"/crypto-news"}>
+                <Link href={"/new-crypto"}>
                   <button className="border border-primary text-primary px-5 py-2">
                     See More
                   </button>
                 </Link>
               </div>
             </div>
-            <div>
+            <div className=" md:w-1/2">
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
                 <h2 className=" text-4xl border-b border-gray-300 pb-3">
                   Politics and Crypto
                 </h2>
               </div>
-              <PreviewArticle />
+              <PreviewArticle category={'politics and crypto'}  />
                <div className=" mt-4">
-                <Link href={"/crypto-news"}>
+                <Link href={"/politics-and-crypto"}>
                   <button className="border border-primary text-primary px-5 py-2">
                     See More
                   </button>
@@ -181,14 +182,14 @@ export default function Home() {
         </section>
         <section className=" px-5 py-10 lg:px-12">
           <div className=" flex flex-col gap-y-24 md:flex-row md:gap-x-5 lg:gap-x-16">
-            <div>
+            <div className=" md:w-1/2">
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
                 <h2 className=" text-4xl border-b border-gray-300 pb-3">
                   New Tech
                 </h2>
               </div>
-              <PreviewArticle />
+              <PreviewArticle category={'new tech'}  />
                <div className=" mt-4">
                 <Link href={"/new-tech"}>
                   <button className="border border-primary text-primary px-5 py-2">
@@ -197,14 +198,14 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div>
+            <div className=" md:w-1/2">
               <div>
                 {/* <span className=" text-primary text-sm">Breaking</span> */}
                 <h2 className=" text-4xl border-b border-gray-300 pb-3">
                   Defi
                 </h2>
               </div>
-              <PreviewArticle />
+              <PreviewArticle category={'defi'}  />
                <div className=" mt-4">
                 <Link href={"/defi"}>
                   <button className="border border-primary text-primary px-5 py-2">
@@ -223,53 +224,7 @@ export default function Home() {
                 Events
               </h2>
             </div>
-            <div className=" mt-8 flex flex-col items-center gap-y-2 md:grid grid-cols-3 md:gap-x-2 lg:gap-x-5">
-              <div className=" relative h-[210px]">
-                <div className=" px-3 pb-5 text-white absolute bg-black bg-opacity-30 h-full w-full flex flex-col justify-end">
-                  <h3 className=" text-xl font-medium">
-                    Fintech Week London 2025
-                  </h3>
-                  <p className=" text-gray-200 text-sm mt-2">
-                    {" "}
-                    <span className=" font-semibold">Editor</span> - May 12,
-                    2025
-                  </p>
-                </div>
-                <Image src={sui} className=" min-w-full h-full object-cover" />
-              </div>
-              <div className=" relative h-[210px]">
-                <div className=" px-3 pb-5 text-white absolute bg-black bg-opacity-30 h-full w-full flex flex-col justify-end">
-                  <h3 className=" text-xl font-medium">
-                    Fintech Week London 2025
-                  </h3>
-                  <p className=" text-gray-200 text-sm mt-2">
-                    {" "}
-                    <span className=" font-semibold">Editor</span> - May 12,
-                    2025
-                  </p>
-                </div>
-                <Image
-                  src={pumpkin}
-                  className=" min-w-full h-full object-cover"
-                />
-              </div>
-              <div className=" relative h-[210px]">
-                <div className=" px-3 pb-5 text-white absolute bg-black bg-opacity-30 h-full w-full flex flex-col justify-end">
-                  <h3 className=" text-xl font-medium">
-                    Fintech Week London 2025
-                  </h3>
-                  <p className=" text-gray-200 text-sm mt-2">
-                    {" "}
-                    <span className=" font-semibold">Editor</span> - May 12,
-                    2025
-                  </p>
-                </div>
-                <Image
-                  src={trading}
-                  className=" min-w-full h-full object-cover"
-                />
-              </div>
-            </div>
+            <EventsArticle />
              <div className=" mt-4 flex justify-center items-center">
                 <Link href={"/events"}>
                   <button className="border border-primary text-primary px-5 py-2">
