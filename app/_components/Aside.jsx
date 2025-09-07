@@ -20,7 +20,7 @@ import { getAllPosts } from "@/utils/supabase";
 
 export default function Aside() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -31,13 +31,13 @@ export default function Aside() {
       } catch (err) {
         console.error("Error fetching posts:", err);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
 
     fetchPosts();
   }, []);
-  const { data, error } = useFetch(
+  const { data, loading, error } = useFetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order&per_page=10&page=1"
   );
   const options = {
