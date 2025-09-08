@@ -186,7 +186,7 @@ export default function Header() {
               <div className=" mt-8 max-h-[375px] overflow-scroll hide-scroll absolute top-[15px] z-30 bg-white ">
                 {searchValue != "" && data
                   ? data.coins.map((coin, index) => (
-                      <Link href={"/"} key={index}>
+                      <Link href={`/crypto/${coin.id}`} key={index}>
                         <div className=" flex items-center gap-x-2 px-3 py-4 border-b border-gray-200">
                           <img src={coin.thumb} alt={coin.name + "image"} />
                           <p className=" text-sm">
@@ -334,7 +334,7 @@ export default function Header() {
           <div className=" mt-8 max-h-[375px] overflow-scroll hide-scroll">
             {searchValue != "" && data
               ? data.coins.map((coin, index) => (
-                  <Link href={"/"} key={index}>
+                  <Link href={`/crypto/${coin.id}`} key={index}>
                     <div className=" flex items-center gap-x-2 py-4 border-b border-gray-700">
                       <img src={coin.thumb} alt={coin.name + "image"} />
                       <p className=" text-sm">

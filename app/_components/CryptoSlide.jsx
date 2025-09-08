@@ -20,11 +20,13 @@ export default function CryptoSlide() {
   const { data, loading, error } = useFetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order&per_page=100&page=1"
   );
-
-    const onMouseDown = (e) => {
+  console.log(data);
+  const onMouseDown = (e) => {
     setIsDragging(true);
     // Pause the CSS animation
-    marqueeRef.current.querySelector('.marquee-content').classList.add('paused');
+    marqueeRef.current
+      .querySelector(".marquee-content")
+      .classList.add("paused");
     setStartX(e.pageX - marqueeRef.current.offsetLeft);
     setScrollLeft(marqueeRef.current.scrollLeft);
   };
@@ -33,14 +35,18 @@ export default function CryptoSlide() {
     // Resume the CSS animation if not dragging
     if (isDragging) {
       setIsDragging(false);
-      marqueeRef.current.querySelector('.marquee-content').classList.remove('paused');
+      marqueeRef.current
+        .querySelector(".marquee-content")
+        .classList.remove("paused");
     }
   };
 
   const onMouseUp = () => {
     // Resume the CSS animation
     setIsDragging(false);
-    marqueeRef.current.querySelector('.marquee-content').classList.remove('paused');
+    marqueeRef.current
+      .querySelector(".marquee-content")
+      .classList.remove("paused");
   };
 
   const onMouseMove = (e) => {
@@ -63,7 +69,6 @@ export default function CryptoSlide() {
     }
   };
 
-
   return (
     <div
       className="marquee-container"
@@ -76,7 +81,7 @@ export default function CryptoSlide() {
       <div className="marquee-content">
         {!loading &&
           data.map((crypto, index) => (
-            <Link href={""} key={index}>
+            <Link href={`/crypto/${crypto.id}`} key={index}>
               <div className="crypto-item border ">
                 <div className=" flex items-center gap-x-2">
                   <div>

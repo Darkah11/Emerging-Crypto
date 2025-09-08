@@ -93,7 +93,7 @@ export default function Aside() {
         <div className=" mt-8 flex flex-col">
           {!loading &&
             data.map((crypto, index) => (
-              <Link href={""} key={index}>
+              <Link href={`/crypto/${crypto.id}`} key={index}>
                 <div className=" border-b flex items-center justify-between py-3">
                   <div className=" flex items-center gap-x-3">
                     <img

@@ -26,7 +26,7 @@ export default function page({ params }) {
                   <ArticleDetails id={id} />
                 </div>
                 <div className=" lg:w-1/2">
-                  <Aside />
+                  {/* <Aside /> */}
                 </div>
               </div>
             </section>

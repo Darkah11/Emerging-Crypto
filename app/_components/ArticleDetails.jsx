@@ -54,7 +54,7 @@ export default function ArticleDetails({id}) {
         <img
           src={article.image_url}
           alt={article.title + "image"}
-          className=" w-full aspect-[3/2]"
+          className=" w-full aspect-[3/2] object-cover"
         />
       </div>
       <div className=" mt-8 lg:pr-10">
