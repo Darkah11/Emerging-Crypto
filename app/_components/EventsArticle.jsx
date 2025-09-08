@@ -38,7 +38,7 @@ export default function EventsArticle() {
     <>
     {posts.length !== 0 ? <div className=" mt-8 flex flex-col items-center gap-y-2 md:grid grid-cols-3 md:gap-x-2 lg:gap-x-5">
       {posts.map((post) => (
-        <Link href={`/${post.id}`} key={post.id}>
+        <Link href={`/${post.id}-${post.slug}`} key={post.id}>
           <div className=" relative h-[210px]">
             <div className=" px-3 pb-5 text-white absolute bg-black bg-opacity-30 h-full w-full flex flex-col justify-end">
               <h3 className=" text-xl font-medium">{post.title}</h3>
