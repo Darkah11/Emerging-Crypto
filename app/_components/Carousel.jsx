@@ -43,7 +43,9 @@ export default function LibraryCarousel() {
           {posts.map((post) => (
             <Link  href={`/${post.id}-${post.slug}`} key={post.id} className=" group">
               <div className="h-[350px] w-full relative">
-                <img
+                <Image
+                width={500}
+                height={300}
                   src={post.image_url}
                   alt={post.title}
                   style={{ objectFit: "cover" }}
