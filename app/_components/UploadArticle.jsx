@@ -7,6 +7,7 @@ import {
   deletePost,
   createPost,
   updatePost,
+  getPaginatedPosts,
 } from "../../utils/supabase";
 import ImageUploader from "react-image-upload";
 import "react-image-upload/dist/index.css";
@@ -27,22 +28,26 @@ export default function UploadArticle() {
    const [showDeleteModal, setShowDeleteModal] = useState(false);
    const [postToDelete, setPostToDelete] = useState(null);
 
-   useEffect(() => {
-     const fetchPosts = async () => {
-       try {
-         const posts = await getAllPosts();
-         setPosts(posts);
-         console.log(posts);
-         
-       } catch (err) {
-         console.error("Error fetching posts:", err);
-       } finally {
-         setLoading(false);
-       }
-     };
+  const [page, setPage] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
+  const limit = 5; // posts per page
 
-     fetchPosts();
-   }, []);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const { posts, total } = await getPaginatedPosts(page, limit);
+        setPosts(posts);
+        setTotalPosts(total);
+      } catch (err) {
+        console.error("Error fetching posts:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [page]);
 
    const handlePhotoChange = (e) => {
      setImagePreview(URL.createObjectURL(e.target.files[0]));
@@ -68,8 +73,10 @@ export default function UploadArticle() {
          });
        }
 
-       setPosts(await getAllPosts());
-       setLoading(false);
+      const { posts, total } = await getPaginatedPosts(page, limit);
+      setPosts(posts);
+      setTotalPosts(total);
+      setLoading(false);
        resetForm();
      } catch (err) {
        console.error("Error saving post:", err.response?.data || err.message);
@@ -95,7 +102,10 @@ export default function UploadArticle() {
    const handleConfirmDelete = async () => {
      try {
        await deletePost(postToDelete);
-       setPosts(posts.filter((post) => post.id !== postToDelete));
+      // setPosts(posts.filter((post) => post.id !== postToDelete));
+          const { posts, total } = await getPaginatedPosts(page, limit);
+          setPosts(posts);
+          setTotalPosts(total);
        setShowDeleteModal(false);
      } catch (err) {
        console.error("Error deleting post:", err);
@@ -110,7 +120,7 @@ export default function UploadArticle() {
      setIsEditing(false);
      setCurrentPostId(null);
    };
-
+ const totalPages = Math.ceil(totalPosts / limit);
    if (loading) return <Loader />;
 
   return (
@@ -257,51 +267,6 @@ export default function UploadArticle() {
             )}
           </div>
 
-          {/* <div className="App">
-        <ImageUploading
-          multiple
-          value={images}
-          onChange={onChange}
-          maxNumber={maxNumber}
-          dataURLKey="data_url"
-        >
-          {({
-            imageList,
-            onImageUpload,
-            onImageRemoveAll,
-            onImageUpdate,
-            onImageRemove,
-            isDragging,
-            dragProps,
-          }) => (
-            // write your building UI
-            <div className="upload__image-wrapper">
-              <button
-                style={isDragging ? { color: "red" } : undefined}
-                onClick={() => console.log("clicked")}
-                {...dragProps}
-              >
-                Click or Drop here
-              </button>
-              &nbsp;
-              <button onClick={onImageRemoveAll}>Remove all images</button>
-              {imageList.map((image, index) => (
-                <div key={index} className="image-item">
-                  <img
-                    src={image["data_url"]}
-                    alt="image"
-                    className=" w-24 h-24"
-                  />
-                  <div className="image-item__btn-wrapper">
-                    <button onClick={() => onImageUpdate(index)}>Update</button>
-                    <button onClick={() => onImageRemove(index)}>Remove</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </ImageUploading>
-      </div> */}
         </form>
       </section>
       <section>
@@ -341,6 +306,27 @@ export default function UploadArticle() {
               ))}
             </div>
           )}
+           {/* Pagination */}
+          <div className="flex justify-between items-center mt-6">
+            <button
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+              className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span>
+              Page {page} of {totalPages}
+            </span>
+            <button
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+              className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+       
         </div>
       </section>
       {showDeleteModal && (

@@ -9,6 +9,15 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Image Upload to Storage
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // spaces → dashes
+    .replace(/[^\w\-]+/g, "") // remove non-word chars
+    .replace(/\-\-+/g, "-"); // collapse multiple dashes
+}
 
 export const uploadImage = async (file) => {
   const fileName = `posts/${Date.now()}_${file.name}`;
@@ -72,12 +81,15 @@ export const createPost = async ({ title, body, categories, imageFile }) => {
     imageUrl = `${supabaseUrl}/storage/v1/object/public/blog-images/${imagePath}`;
   }
 
+  const slug = slugify(title); // ✅ generate slug
+
   const { data, error } = await supabase
     .from("posts")
     .insert({
       title,
+      slug, // ✅ store slug
       body,
-      category: Array.isArray(categories) ? categories : [categories], // ✅ force array
+      category: Array.isArray(categories) ? categories : [categories],
       image_url: imageUrl,
       created_at: new Date().toISOString(),
     })
@@ -88,12 +100,17 @@ export const createPost = async ({ title, body, categories, imageFile }) => {
   return data;
 };
 
+
 // Update Post
-export const updatePost = async (id, { title, body, categories, imageFile }) => {
+export const updatePost = async (
+  id,
+  { title, body, categories, imageFile }
+) => {
   const updates = {
     title,
+    slug: slugify(title), // ✅ regenerate slug if title changes
     body,
-    category: Array.isArray(categories) ? categories : [categories], // ✅ force array
+    category: Array.isArray(categories) ? categories : [categories],
   };
 
   if (imageFile) {
@@ -167,3 +184,17 @@ supabase.from("posts").select("id", { count: "exact", head: true }),
   return { emailCount, postCount };
 };
 
+// Get paginated posts
+export const getPaginatedPosts = async (page = 1, limit = 5) => {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from("posts")
+    .select("*", { count: "exact" }) // count = total posts
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  if (error) throw error;
+  return { posts: data, total: count };
+};
