@@ -30,7 +30,7 @@ export default function NewTech() {
           <h2 className=" text-3xl font-semibold md:text-4xl">New Tech</h2>
           <p className=" mt-2 max-w-[600px]">Behind the tokens are the tools. From zero-knowledge proofs
             to cross-chain bridges and scaling breakthroughs, we explore the new
-            technologies driving crypto’s evolution — and how they’ll change the
+            technologies driving crypto&apos;s evolution — and how they’ll change the
             way you interact with the blockchain.
           </p>
         </div>

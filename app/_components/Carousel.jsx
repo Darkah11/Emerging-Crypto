@@ -41,7 +41,7 @@ export default function LibraryCarousel() {
           showThumbs={false}
         >
           {posts.map((post) => (
-            <Link  href={`/${post.id}`} key={post.id} className=" group">
+            <Link  href={`/${post.id}-${post.slug}`} key={post.id} className=" group">
               <div className="h-[350px] w-full relative">
                 <img
                   src={post.image_url}
@@ -68,7 +68,7 @@ export default function LibraryCarousel() {
       <div className=" grid-container hidden lg:grid lg:h-[550px]">
         {posts.map((post, index) => (
           <Link
-            href={`/${post.id}`}
+            href={`/${post.id}-${post.slug}`}
             key={post.id}
             className={` group grid-child${index} h-full`}
           >

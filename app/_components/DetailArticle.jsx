@@ -88,7 +88,7 @@ export default function DetailArticle() {
       {posts &&
         posts.map((item, index) => (
           <div key={index} className="max-w-[450px] md:mx-auto">
-            <Link href={`/${item.id}`}>
+            <Link href={`/${item.id}-${item.slug}`}>
               <img
                 alt={item.title}
                 src={item.image_url}
@@ -97,7 +97,7 @@ export default function DetailArticle() {
             </Link>
             <div className=" text-black mt-3">
               <Link
-                href={`/${item.id}`}
+                href={`/${item.id}-${item.slug}`}
                 className=" text-xl font-bold hover:text-primary"
               >
                 {item.title}

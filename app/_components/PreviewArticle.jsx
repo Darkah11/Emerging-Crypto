@@ -97,7 +97,7 @@ export default function PreviewArticle({ category }) {
     <>
     {posts.length !== 0 ? <div className=" mt-8 flex flex-col gap-y-5">
       {posts.map((item, index) => (
-        <Link key={index} href={`/${item.id}`} className="group">
+        <Link key={index} href={`/${item.id}-${item.slug}`} className="group">
           <div className=" flex items-center gap-x-2 h-[85px]">
             <div>
               <img
