@@ -1,11 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
-//const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-//const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-const supabaseUrl = "https://tgqoaogsjjpllhbrjkal.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncW9hb2dzampwbGxoYnJqa2FsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Njc2Nzg1MSwiZXhwIjoyMDcyMzQzODUxfQ.VTnIZ3BqIo8m5l5TXlAZEqcchjLGAXQq163QAtOJgY0";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Image Upload to Storage
